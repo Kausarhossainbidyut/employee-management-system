@@ -1,20 +1,35 @@
-
-const CompleteTask = ({data}) => {
+const CompleteTask = ({ data }) => {
   return (
-    <div className="shrink-0 h-full w-75 p-5 rounded-xl bg-red-400">
-      <div className="flex justify-between items-center">
-        <h3 className="bg-red-600 px-3 text-sm py-1">{data.category}</h3>
-        <h4 className="text-sm">{data.taskDate}</h4>
+    <div className="shrink-0 w-80 h-[380px] bg-[#1E293B] border border-slate-700 rounded-2xl p-6 flex flex-col shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <span className="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-3 py-1 rounded-full text-xs font-semibold">
+          {data.category}
+        </span>
+
+        <span className="text-sm text-slate-400">
+          {data.taskDate}
+        </span>
       </div>
-      <h2 className="mt-5 text-2xl font-semibold ">{data.taskTitle} </h2>
-      <p className="text-sm mt-2">
+
+      {/* Title */}
+      <h2 className="mt-5 text-2xl font-bold text-white">
+        {data.taskTitle}
+      </h2>
+
+      {/* Description */}
+      <p className="mt-4 text-sm text-slate-300 leading-6 flex-1 overflow-y-auto">
         {data.taskDescription}
       </p>
-      <div className=" mt-2">
-        <button className="w-full bg-green-500 py-1 px-2 text-sm">
-         Completed
-        </button>
-      </div>
+
+      {/* Divider */}
+      <div className="border-t border-slate-700 my-5"></div>
+
+      {/* Status Button */}
+      <button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 rounded-xl transition-all duration-300 shadow-md">
+        ✅ Completed
+      </button>
     </div>
   );
 };
