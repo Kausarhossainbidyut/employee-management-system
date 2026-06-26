@@ -1,72 +1,120 @@
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthProvider";
+
 const AllTask = () => {
+  const authData = useContext(AuthContext);
+
   return (
-    <div className="bg-[#1c1c1c] mt-8 rounded-2xl p-6 border border-zinc-800">
-      {/* Header */}
-      <div className="grid grid-cols-3 bg-[#2a2a2a] px-5 py-4 rounded-xl font-semibold text-lg mb-4 sticky top-0">
-        <h2>Employee</h2>
-        <h2>Task</h2>
-        <h2 className="text-right">Status</h2>
+    <div className="bg-[#1f1f1f] mt-8 rounded-2xl border border-zinc-800 p-4 sm:p-6 shadow-lg">
+      <h2 className="text-xl sm:text-2xl font-bold text-white mb-6">
+        Employee Task Overview
+      </h2>
+
+      {/* Desktop & Tablet */}
+      <div className="hidden md:block overflow-x-auto">
+        <div className="min-w-[700px]">
+          {/* Header */}
+          <div className="grid grid-cols-5 items-center bg-zinc-800 text-zinc-300 px-6 py-4 rounded-xl font-semibold text-sm uppercase tracking-wide">
+            <p>Employee</p>
+            <p className="text-center">New</p>
+            <p className="text-center">Active</p>
+            <p className="text-center">Completed</p>
+            <p className="text-center">Failed</p>
+          </div>
+
+          {/* Body */}
+          <div className="mt-4 space-y-3 max-h-[420px] overflow-y-auto">
+            {authData?.employees?.map((employee) => (
+              <div
+                key={employee.id}
+                className="grid grid-cols-5 items-center bg-zinc-900 hover:bg-zinc-800 transition-all rounded-xl px-6 py-4 border border-zinc-800"
+              >
+                <div>
+                  <h3 className="text-white font-semibold">
+                    {employee.firstName}
+                  </h3>
+                  <p className="text-zinc-400 text-sm break-all">
+                    {employee.email}
+                  </p>
+                </div>
+
+                <div className="flex justify-center">
+                  <span className="bg-sky-500/15 text-sky-400 px-4 py-1 rounded-full">
+                    {employee.taskNumbers.newTask}
+                  </span>
+                </div>
+
+                <div className="flex justify-center">
+                  <span className="bg-amber-500/15 text-amber-400 px-4 py-1 rounded-full">
+                    {employee.taskNumbers.active}
+                  </span>
+                </div>
+
+                <div className="flex justify-center">
+                  <span className="bg-emerald-500/15 text-emerald-400 px-4 py-1 rounded-full">
+                    {employee.taskNumbers.completed}
+                  </span>
+                </div>
+
+                <div className="flex justify-center">
+                  <span className="bg-rose-500/15 text-rose-400 px-4 py-1 rounded-full">
+                    {employee.taskNumbers.failed}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
-      {/* Task List */}
-      <div className="space-y-3 h-72 overflow-y-auto pr-2">
+      {/* Mobile */}
+      <div className="md:hidden space-y-4">
+        {authData?.employees?.map((employee) => (
+          <div
+            key={employee.id}
+            className="bg-zinc-900 border border-zinc-800 rounded-xl p-4"
+          >
+            <div className="mb-4">
+              <h3 className="text-lg font-semibold text-white">
+                {employee.firstName}
+              </h3>
 
-        <div className="flex justify-between items-center bg-rose-500 px-5 py-4 rounded-xl shadow-md hover:scale-[1.01] transition-all">
-          <h2 className="font-medium text-lg">KHB</h2>
-          <h3 className="font-medium">Make a UI Design</h3>
-          <h4 className="bg-white/20 px-3 py-1 rounded-full text-sm">
-            Pending
-          </h4>
-        </div>
+              <p className="text-zinc-400 text-sm break-all">
+                {employee.email}
+              </p>
+            </div>
 
-        <div className="flex justify-between items-center bg-emerald-500 px-5 py-4 rounded-xl shadow-md hover:scale-[1.01] transition-all">
-          <h2 className="font-medium text-lg">Rahim</h2>
-          <h3 className="font-medium">Build Login System</h3>
-          <h4 className="bg-white/20 px-3 py-1 rounded-full text-sm">
-            Completed
-          </h4>
-        </div>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="bg-zinc-800 rounded-lg p-3 text-center">
+                <p className="text-xs text-zinc-400">New</p>
+                <p className="text-sky-400 font-bold text-lg">
+                  {employee.taskNumbers.newTask}
+                </p>
+              </div>
 
-        <div className="flex justify-between items-center bg-sky-500 px-5 py-4 rounded-xl shadow-md hover:scale-[1.01] transition-all">
-          <h2 className="font-medium text-lg">Karim</h2>
-          <h3 className="font-medium">API Integration</h3>
-          <h4 className="bg-white/20 px-3 py-1 rounded-full text-sm">
-            In Progress
-          </h4>
-        </div>
+              <div className="bg-zinc-800 rounded-lg p-3 text-center">
+                <p className="text-xs text-zinc-400">Active</p>
+                <p className="text-amber-400 font-bold text-lg">
+                  {employee.taskNumbers.active}
+                </p>
+              </div>
 
-        <div className="flex justify-between items-center bg-amber-500 px-5 py-4 rounded-xl shadow-md hover:scale-[1.01] transition-all">
-          <h2 className="font-medium text-lg">Hasan</h2>
-          <h3 className="font-medium">Testing Dashboard</h3>
-          <h4 className="bg-black/20 px-3 py-1 rounded-full text-sm">
-            Review
-          </h4>
-        </div>
+              <div className="bg-zinc-800 rounded-lg p-3 text-center">
+                <p className="text-xs text-zinc-400">Completed</p>
+                <p className="text-emerald-400 font-bold text-lg">
+                  {employee.taskNumbers.completed}
+                </p>
+              </div>
 
-        <div className="flex justify-between items-center bg-violet-500 px-5 py-4 rounded-xl shadow-md hover:scale-[1.01] transition-all">
-          <h2 className="font-medium text-lg">Sakib</h2>
-          <h3 className="font-medium">Database Design</h3>
-          <h4 className="bg-white/20 px-3 py-1 rounded-full text-sm">
-            Assigned
-          </h4>
-        </div>
-
-        <div className="flex justify-between items-center bg-pink-500 px-5 py-4 rounded-xl shadow-md hover:scale-[1.01] transition-all">
-          <h2 className="font-medium text-lg">Nayeem</h2>
-          <h3 className="font-medium">Landing Page Design</h3>
-          <h4 className="bg-white/20 px-3 py-1 rounded-full text-sm">
-            Pending
-          </h4>
-        </div>
-
-        <div className="flex justify-between items-center bg-cyan-500 px-5 py-4 rounded-xl shadow-md hover:scale-[1.01] transition-all">
-          <h2 className="font-medium text-lg">Jahid</h2>
-          <h3 className="font-medium">Fix Responsive Issues</h3>
-          <h4 className="bg-white/20 px-3 py-1 rounded-full text-sm">
-            Completed
-          </h4>
-        </div>
-
+              <div className="bg-zinc-800 rounded-lg p-3 text-center">
+                <p className="text-xs text-zinc-400">Failed</p>
+                <p className="text-rose-400 font-bold text-lg">
+                  {employee.taskNumbers.failed}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
