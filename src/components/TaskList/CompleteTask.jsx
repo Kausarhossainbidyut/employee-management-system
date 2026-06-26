@@ -1,24 +1,25 @@
 const CompleteTask = ({ data }) => {
   return (
-    <div className="shrink-0 w-80 h-[380px] bg-[#1E293B] border border-slate-700 rounded-2xl p-6 flex flex-col shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
+    <div className="shrink-0 w-80 h-[390px] bg-[#1E293B] border border-slate-700 rounded-2xl p-6 flex flex-col shadow-lg hover:border-emerald-500/50 hover:shadow-emerald-500/10 hover:-translate-y-1 transition-all duration-300">
+      
       {/* Header */}
       <div className="flex items-center justify-between">
-        <span className="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-3 py-1 rounded-full text-xs font-semibold">
+        <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
           {data.category}
         </span>
 
-        <span className="text-sm text-slate-400">
-          {data.taskDate}
+        <span className="text-xs text-slate-400">
+          📅 {data.taskDate}
         </span>
       </div>
 
       {/* Title */}
-      <h2 className="mt-5 text-2xl font-bold text-white">
+      <h2 className="mt-6 text-2xl font-bold text-white leading-snug">
         {data.taskTitle}
       </h2>
 
       {/* Description */}
-      <p className="mt-4 text-sm text-slate-300 leading-6 flex-1 overflow-y-auto">
+      <p className="mt-4 flex-1 overflow-y-auto text-sm leading-7 text-slate-300">
         {data.taskDescription}
       </p>
 
@@ -28,7 +29,7 @@ const CompleteTask = ({ data }) => {
       {/* Status */}
       <button
         disabled
-        className="w-full bg-emerald-600 text-white font-semibold py-3 rounded-xl cursor-not-allowed opacity-90"
+        className="w-full rounded-xl bg-emerald-600 py-3 text-white font-semibold cursor-not-allowed opacity-90"
       >
         ✅ Completed
       </button>

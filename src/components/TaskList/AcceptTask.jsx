@@ -1,47 +1,48 @@
+import { useState } from "react";
+
 const AcceptTask = ({ data, employeeId, taskIndex }) => {
-  const completeTask = () => {
+  const [isFinished, setIsFinished] = useState(false);
+
+  const updateTask = (status) => {
+    if (isFinished) return;
+
     const employees = JSON.parse(localStorage.getItem("employees")) || [];
 
     const employee = employees.find((emp) => emp.id === employeeId);
 
     if (!employee) return;
 
-    employee.tasks[taskIndex] = {
-      ...employee.tasks[taskIndex],
-      active: false,
-      newTask: false,
-      completed: true,
-      failed: false,
-    };
+    const task = employee.tasks[taskIndex];
 
-    employee.taskNumbers.active--;
-    employee.taskNumbers.completed++;
+    // Already finished হলে আর কিছু করবে না
+    if (task.completed || task.failed) {
+      setIsFinished(true);
+      return;
+    }
 
-    localStorage.setItem("employees", JSON.stringify(employees));
+    // Task Status Update
+    task.active = false;
+    task.newTask = false;
+    task.completed = status === "completed";
+    task.failed = status === "failed";
 
-    window.location.reload();
-  };
+    // Counter Update
+    employee.taskNumbers.active = Math.max(
+      0,
+      employee.taskNumbers.active - 1
+    );
 
-  const failedTask = () => {
-    const employees = JSON.parse(localStorage.getItem("employees")) || [];
-
-    const employee = employees.find((emp) => emp.id === employeeId);
-
-    if (!employee) return;
-
-    employee.tasks[taskIndex] = {
-      ...employee.tasks[taskIndex],
-      active: false,
-      newTask: false,
-      completed: false,
-      failed: true,
-    };
-
-    employee.taskNumbers.active--;
-    employee.taskNumbers.failed++;
+    if (status === "completed") {
+      employee.taskNumbers.completed += 1;
+    } else {
+      employee.taskNumbers.failed += 1;
+    }
 
     localStorage.setItem("employees", JSON.stringify(employees));
 
+    setIsFinished(true);
+
+    // Refresh UI
     window.location.reload();
   };
 
@@ -61,7 +62,7 @@ const AcceptTask = ({ data, employeeId, taskIndex }) => {
 
       {/* Title */}
       <div className="mt-6">
-        <h2 className="text-2xl font-bold text-white leading-snug">
+        <h2 className="text-2xl font-bold text-white">
           {data.taskTitle}
         </h2>
       </div>
@@ -73,21 +74,30 @@ const AcceptTask = ({ data, employeeId, taskIndex }) => {
         </p>
       </div>
 
-      {/* Divider */}
       <div className="border-t border-slate-700 my-5"></div>
 
       {/* Buttons */}
       <div className="flex gap-3">
         <button
-          onClick={completeTask}
-          className="flex-1 rounded-xl bg-emerald-600 hover:bg-emerald-700 py-2.5 text-sm font-semibold text-white transition-all duration-300"
+          disabled={isFinished}
+          onClick={() => updateTask("completed")}
+          className={`flex-1 rounded-xl py-2.5 text-sm font-semibold text-white transition ${
+            isFinished
+              ? "bg-gray-600 cursor-not-allowed"
+              : "bg-emerald-600 hover:bg-emerald-700"
+          }`}
         >
           ✓ Complete
         </button>
 
         <button
-          onClick={failedTask}
-          className="flex-1 rounded-xl bg-rose-600 hover:bg-rose-700 py-2.5 text-sm font-semibold text-white transition-all duration-300"
+          disabled={isFinished}
+          onClick={() => updateTask("failed")}
+          className={`flex-1 rounded-xl py-2.5 text-sm font-semibold text-white transition ${
+            isFinished
+              ? "bg-gray-600 cursor-not-allowed"
+              : "bg-rose-600 hover:bg-rose-700"
+          }`}
         >
           ✕ Failed
         </button>
