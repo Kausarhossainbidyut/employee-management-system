@@ -1,16 +1,83 @@
-# React + Vite
+# EMS - Employee Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a React + Vite-based Employee Management System (EMS) project where separate dashboards are used for Admin and Employee roles.
 
-Currently, two official plugins are available:
+## Project Purpose
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+This application is designed for task management and employee administration. Admin users can create tasks and assign them to employees, while employees can view, accept, and update the status of their assigned tasks.
 
-## React Compiler
+## Key Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Admin login
+- Employee login
+- Create new tasks from the Admin dashboard
+- Assign tasks to employees
+- Display task counts on the Employee dashboard
+- View tasks by status: New, Active, Completed, and Failed
+- Allow employees to accept, complete, or mark tasks as failed
+- Responsive user interface
+- Data stored in browser localStorage
 
-## Expanding the ESLint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React
+- Vite
+- Tailwind CSS
+- React Context API
+- localStorage
+
+## Installation
+
+To run the project locally, follow these steps:
+
+```bash
+npm install
+npm run dev
+```
+
+Then open your browser at:
+
+```bash
+http://localhost:5173
+```
+
+## Demo Login Credentials
+
+Admin:
+- Email: khbidyut5@gmail.com
+- Password: 123
+
+Employee:
+- Email: khbidyut31@gmail.com
+- Password: 123
+
+You can also try other employee accounts such as:
+- karim@gmail.com
+- sakib@gmail.com
+- nadim@gmail.com
+- jahid@gmail.com
+
+## Project Structure
+
+```bash
+src/
+  components/
+    Auth/
+    Dashboard/
+    other/
+    TaskList/
+  context/
+  pages/
+  utils/
+```
+
+## Important Notes
+
+- Data in this project is stored in browser localStorage, so clearing the browser data may remove saved information.
+- This project is intended for demo and educational purposes.
+
+## Build the Project
+
+```bash
+npm run build
+```
