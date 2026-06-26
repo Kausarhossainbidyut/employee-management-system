@@ -1,7 +1,52 @@
-const AcceptTask = ({ data }) => {
+const AcceptTask = ({ data, employeeId, taskIndex }) => {
+  const completeTask = () => {
+    const employees = JSON.parse(localStorage.getItem("employees")) || [];
+
+    const employee = employees.find((emp) => emp.id === employeeId);
+
+    if (!employee) return;
+
+    employee.tasks[taskIndex] = {
+      ...employee.tasks[taskIndex],
+      active: false,
+      newTask: false,
+      completed: true,
+      failed: false,
+    };
+
+    employee.taskNumbers.active--;
+    employee.taskNumbers.completed++;
+
+    localStorage.setItem("employees", JSON.stringify(employees));
+
+    window.location.reload();
+  };
+
+  const failedTask = () => {
+    const employees = JSON.parse(localStorage.getItem("employees")) || [];
+
+    const employee = employees.find((emp) => emp.id === employeeId);
+
+    if (!employee) return;
+
+    employee.tasks[taskIndex] = {
+      ...employee.tasks[taskIndex],
+      active: false,
+      newTask: false,
+      completed: false,
+      failed: true,
+    };
+
+    employee.taskNumbers.active--;
+    employee.taskNumbers.failed++;
+
+    localStorage.setItem("employees", JSON.stringify(employees));
+
+    window.location.reload();
+  };
+
   return (
     <div className="shrink-0 w-80 h-[390px] rounded-2xl bg-[#1E293B] border border-slate-700 p-6 flex flex-col shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-
       {/* Header */}
       <div className="flex items-start justify-between">
         <span className="bg-cyan-500/20 text-cyan-400 text-xs font-semibold px-3 py-1 rounded-full border border-cyan-500/30">
@@ -10,9 +55,7 @@ const AcceptTask = ({ data }) => {
 
         <div className="text-right">
           <p className="text-xs text-slate-400">Due Date</p>
-          <p className="text-sm text-white font-medium">
-            {data.taskDate}
-          </p>
+          <p className="text-sm text-white font-medium">{data.taskDate}</p>
         </div>
       </div>
 
@@ -35,11 +78,17 @@ const AcceptTask = ({ data }) => {
 
       {/* Buttons */}
       <div className="flex gap-3">
-        <button className="flex-1 rounded-xl bg-emerald-600 hover:bg-emerald-700 py-2.5 text-sm font-semibold text-white transition-all duration-300">
+        <button
+          onClick={completeTask}
+          className="flex-1 rounded-xl bg-emerald-600 hover:bg-emerald-700 py-2.5 text-sm font-semibold text-white transition-all duration-300"
+        >
           ✓ Complete
         </button>
 
-        <button className="flex-1 rounded-xl bg-rose-600 hover:bg-rose-700 py-2.5 text-sm font-semibold text-white transition-all duration-300">
+        <button
+          onClick={failedTask}
+          className="flex-1 rounded-xl bg-rose-600 hover:bg-rose-700 py-2.5 text-sm font-semibold text-white transition-all duration-300"
+        >
           ✕ Failed
         </button>
       </div>

@@ -25,7 +25,10 @@ const FailedTask = ({ data }) => {
 
       {/* Footer */}
       <div className="pt-5 border-t border-slate-700">
-        <button className="w-full rounded-xl bg-gradient-to-r from-rose-500 to-red-600 py-3 font-semibold text-white shadow-lg cursor-default">
+        <button
+          disabled
+          className="w-full rounded-xl bg-gradient-to-r from-rose-500 to-red-600 py-3 font-semibold text-white opacity-90 cursor-not-allowed"
+        >
           ❌ Failed
         </button>
       </div>

@@ -14,10 +14,10 @@ const employees = [
 
     tasks: [
       {
-        active: true,
-        newTask: true,
-        completed: false,
-        failed: false,
+        active: false, //
+        newTask: false, //
+        completed: false, //
+        failed: true,
         taskTitle: "Design Homepage",
         taskDescription:
           "Create a responsive homepage UI using React and Tailwind CSS.",
