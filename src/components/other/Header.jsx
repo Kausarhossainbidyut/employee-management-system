@@ -1,7 +1,7 @@
-const Header = ({ data }) => {
+const Header = ({ data,changeUser }) => {
   const logOutUser = () => {
     localStorage.removeItem("loggedInUser");
-    window.location.reload();
+    changeUser('')
   };
 
   const username = data ? data.firstName : "Admin";

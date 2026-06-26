@@ -76,11 +76,11 @@ const App = () => {
       {!user && <Login handleLogin={handleLogin} />}
 
       {user === "admin" && (
-        <AdminDashboard data={loggedInUserData} />
+        <AdminDashboard data={loggedInUserData} changeUser={setUser} />
       )}
 
       {user === "employee" && (
-        <EmployeeDashboard data={loggedInUserData} />
+        <EmployeeDashboard data={loggedInUserData} changeUser={setUser}/>
       )}
     </>
   );
