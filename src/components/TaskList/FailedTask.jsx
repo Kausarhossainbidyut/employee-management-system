@@ -1,17 +1,32 @@
-
-const FailedTask = ({data}) => {
+const FailedTask = ({ data }) => {
   return (
-    <div className="shrink-0 h-full w-75 p-5 rounded-xl bg-yellow-400">
+    <div className="shrink-0 w-80 h-[390px] rounded-3xl bg-[#111827] border border-slate-700 p-6 flex flex-col shadow-xl hover:border-rose-500/60 hover:shadow-rose-500/20 hover:-translate-y-2 transition-all duration-300">
+
+      {/* Header */}
       <div className="flex justify-between items-center">
-        <h3 className="bg-red-600 px-3 text-sm py-1">{data.category}</h3>
-        <h4 className="text-sm">{data.taskDate}</h4>
+        <span className="px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs font-semibold tracking-wide">
+          {data.category}
+        </span>
+
+        <span className="text-xs text-slate-400">
+          📅 {data.taskDate}
+        </span>
       </div>
-      <h2 className="mt-5 text-2xl font-semibold ">{data.taskTitle}</h2>
-      <p className="text-sm mt-2">{data.taskDescription}
+
+      {/* Title */}
+      <h2 className="mt-6 text-2xl font-bold text-white leading-snug">
+        {data.taskTitle}
+      </h2>
+
+      {/* Description */}
+      <p className="mt-4 text-sm leading-7 text-slate-400 flex-1 overflow-y-auto">
+        {data.taskDescription}
       </p>
-      <div className=" mt-2">
-        <button className="w-full bg-green-500 py-1 px-2 text-sm">
-          Failed
+
+      {/* Footer */}
+      <div className="pt-5 border-t border-slate-700">
+        <button className="w-full rounded-xl bg-gradient-to-r from-rose-500 to-red-600 py-3 font-semibold text-white shadow-lg cursor-default">
+          ❌ Failed
         </button>
       </div>
     </div>
