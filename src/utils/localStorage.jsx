@@ -6,18 +6,18 @@ const employees = [
     password: "123",
 
     taskNumbers: {
-      active: 8,
-      newTask: 5,
-      completed: 4,
-      failed: 3,
+      active: 1,
+      newTask: 0,
+      completed: 0,
+      failed: 0,
     },
 
     tasks: [
       {
-        active: false, //
+        active: true, //
         newTask: false, //
         completed: false, //
-        failed: true,
+        failed: false,
         taskTitle: "Design Homepage",
         taskDescription:
           "Create a responsive homepage UI using React and Tailwind CSS.",
